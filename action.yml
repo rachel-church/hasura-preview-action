@@ -1,0 +1,32 @@
+name: "Hasura Preview App Management"
+description: "Create and manage a Hasura Cloud instance for a preview environment."
+inputs:
+  name:
+    description: "Name of the preview app"
+    required: true
+  hasuraEnv:
+    description: "Set of environment variables that you wish to provide to the created preview app. Example: HASURA_GRAPHQL_JWT_SECRET, PG_DATABASE_URL etc. Please note that this is different from the env vars of this action."
+    required: false
+  delete:
+    description: "Set true when you are using this action on pull request close event. This will delete the preview app with the given name."
+    required: false
+    default: "false"
+  adminSecret:
+    description: "The admin secret for the Hasura GraphQL Engine. If not provided, one will be created."
+    required: false
+outputs:
+  cloudUrl:
+    description: "Cloud URL of the created preview app. ex: https://my-preview-app.hasura.app"
+  graphQLEndpoint:
+    description: "GraphQL endpoint of the created preview app. ex: https://my-preview-app.hasura.app/v1/graphql"
+  consoleURL:
+    description: "Console URL of the created preview app. ex: https://cloud.hasura.io/projects/my-preview-app"
+  projectName:
+    description: "Name of the created preview app"
+  projectId:
+    description: "Project ID of the created preview app"
+  adminSecret:
+    description: "The admin secret for the Hasura GraphQL Engine."
+runs:
+  using: "node20"
+  main: "index.js"
